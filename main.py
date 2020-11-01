@@ -19,6 +19,17 @@ def PomTimer(duration=1500):
     print(f"Done!!! You have completed {pomCounter} Pomodoros!")
 
 
+def BreakTimer(duration=300):
+    breakDur = duration
+    while breakDur:
+        min, sec = divmod(breakDur, 60)
+        timer = f'{min:02d}:{sec:02d}'
+        print(timer, end='\r')
+        time.sleep(1)
+        breakDur -= 1
+    print("Your break is over!")
+
+
 # first, create a simple timer loop (with input)
 pomCounter = 0
 while True:
@@ -31,14 +42,7 @@ while True:
         sys.exit(1)
     elif answer.lower() == 'y':
         PomTimer(10)
-        breakDur = 5
-        while breakDur:
-            min, sec = divmod(breakDur, 60)
-            brTimer = '{:02d}:{:02d}'.format(min, sec)
-            print(brTimer, end='\r')
-            time.sleep(1)
-            breakDur -= 1
-        print("Your break is over!")
+        BreakTimer(10)
     elif answer.lower() in ('q', 'n'):
         print("Goodbye!")
         sys.exit(0)
